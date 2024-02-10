@@ -84,14 +84,15 @@ def generate():
                     "data": [],
                 }
             )
-
-        # Generate a script
-        script = generate_script(data["videoSubject"], paragraph_number, ai_model)  # Pass the AI model to the script generation
+        
         voice = data["voice"]
 
         if not voice:
             print(colored("[!] No voice was selected. Defaulting to \"en_us_001\"", "yellow"))
             voice = "en_us_001"
+
+        # Generate a script
+        script = generate_script(data["videoSubject"], paragraph_number, ai_model, voice)  # Pass the AI model to the script generation
 
         # Generate search terms
         search_terms = get_search_terms(
@@ -125,6 +126,7 @@ def generate():
             for url in found_urls:
                 if url not in video_urls:
                     video_urls.append(url)
+                    break
 
         # Define video_paths
         video_paths = []
